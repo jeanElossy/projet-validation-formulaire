@@ -1,9 +1,18 @@
-document.querySelector("form").addEventListener("submit", formValidate);
+document.getElementById("myForm").addEventListener("submit", formValidate);
 function formValidate(e){
-  e.preventDefault();
-  // if (validateInputText(document.querySelector("form").nom) && validateEmail(document.querySelector("form").email) && validatePassword(document.querySelector("form").password) && validateInputTel(document.querySelector("form").number)) {
-  //   document.querySelector("form").submit();
-  // }
+  let erreur;
+  let inputs = document.querySelectorAll("input");
+  for(let i=0; i<inputs.length; i++){
+    if(!inputs[i].value){
+      erreur = "Veuillez renseigner tous les champs";
+    }
+  }
+  if(erreur){
+    e.preventDefault();
+    document.getElementById("erreur").innerHTML = erreur;
+  }else{
+    alert("formulaire envoyé");
+  }
 }
 
 // Verification input name.
@@ -14,9 +23,8 @@ function validateInputText(){
     verify.style.opacity = "1";
     verify.classList.add("icon__validate");
     this.style.borderColor = "green";
-    document.getElementById("erreur__name").innerHTML = "Nom validé !!";
+    document.getElementById("erreur__name").innerHTML = "Nom validé";
     document.getElementById("erreur__name").style.color = "green";
-    return true;
   }else if(!this.value){
     verify.style.opacity = "0";
     document.getElementById("erreur__name").innerHTML = " ";
@@ -27,7 +35,6 @@ function validateInputText(){
     document.getElementById("erreur__name").innerHTML = "Veuillez renseigner un nom d'au moins 7 lettres.";
     document.getElementById("erreur__name").style.color = "red";
     verify.style.opacity = "0";
-    return false;
   }
 }
 
@@ -39,9 +46,8 @@ function validateEmail(){
     verifyEmail.style.opacity = "1"
     verifyEmail.classList.add("icon__validate")
     this.style.borderColor = "green";
-    document.getElementById("erreur__email").innerHTML = "Email validé !!";
+    document.getElementById("erreur__email").innerHTML = "Email validé";
     document.getElementById("erreur__email").style.color = "green";
-    return true;
   }else if(!this.value){
     verifyEmail.style.opacity = "0";
     document.getElementById("erreur__email").innerHTML = " ";
@@ -52,7 +58,7 @@ function validateEmail(){
     document.getElementById("erreur__email").innerHTML = "Veuillez renseigner un email valide.";
     document.getElementById("erreur__email").style.color = "red";
     verifyEmail.style.opacity = "0";
-    return false;
+
   }
 }   
 
@@ -77,10 +83,9 @@ function validatePassword(){
     document.getElementById("erreur__password").style.color = "red";
     this.style.borderColor = "red";
   }else{
-    document.getElementById("erreur__password").innerHTML = "Password validé !!";
+    document.getElementById("erreur__password").innerHTML = "Password validé";
     document.getElementById("erreur__password").style.color = "green";
     this.style.borderColor = "green";
-    return true;
   }
 }
 // Verification input phone number
@@ -91,9 +96,8 @@ function validateInputTel(){
     verifyNumber.style.opacity = "1"
     verifyNumber.classList.add("icon__validate")
     this.style.borderColor = "green";
-    document.getElementById("erreur__number").innerHTML = "Numéro validé !!";
+    document.getElementById("erreur__number").innerHTML = "Numéro validé";
     document.getElementById("erreur__number").style.color = "green";
-    return true;
   }else if(!this.value){
     verifyNumber.style.opacity = "0";
     document.getElementById("erreur__number").innerHTML = " ";
@@ -103,7 +107,7 @@ function validateInputTel(){
     document.getElementById("erreur__number").innerHTML = "Veuillez renseigner un numero de telephone valide de 10 chiffres.";
     document.getElementById("erreur__number").style.color = "red";
     verifyNumber.style.opacity = "0";
-    return false;
+
   }
 }
 // affichage de mot de passe
